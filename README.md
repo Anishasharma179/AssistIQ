@@ -97,9 +97,7 @@ npm run dev
 | POST | /chat | Ask questions |
 | GET | /documents | View uploaded documents |
 | GET | /stats | Dashboard statistics |
-
 ---
-
 ## Future Improvements
 
 - Multi-user authentication
@@ -112,4 +110,4 @@ npm run dev
 
 ## Author
 
-Anish
+Anisha Sharma
