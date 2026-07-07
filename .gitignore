@@ -1,0 +1,22 @@
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environment variables
+backend/.env
+
+# React
+frontend/node_modules/
+frontend/dist/
+
+# Chroma database
+backend/storage/chroma/
+backend/storage/chroma_new/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
