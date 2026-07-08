@@ -1,27 +1,26 @@
-import os
-
-UPLOAD_FOLDER = "storage/uploads"
+from app.services.vector_store import collection
+from app.services.embedding_service import embedding_model
 
 
 def search_documents(query):
 
+    query_embedding = embedding_model.encode([query]).tolist()
+
+    results = collection.query(
+        query_embeddings=query_embedding,
+        n_results=3
+    )
+
     documents = []
     sources = []
 
-    for file in os.listdir(UPLOAD_FOLDER):
+    if results["documents"]:
+        documents = results["documents"][0]
 
-        path = os.path.join(UPLOAD_FOLDER, file)
-
-        if os.path.isfile(path):
-
-            try:
-                with open(path, "r", encoding="utf-8") as f:
-                    text = f.read()
-
-                documents.append(text)
-                sources.append(file)
-
-            except:
-                pass
+    if results["metadatas"]:
+        sources = [
+            item["source"]
+            for item in results["metadatas"][0]
+        ]
 
     return documents, sources

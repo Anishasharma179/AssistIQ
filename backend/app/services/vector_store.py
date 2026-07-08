@@ -12,6 +12,27 @@ collection = client.get_or_create_collection(
 
 def add_chunks(chunks, filename):
 
+    if collection.count() > 0:
+        ids = collection.get()["ids"]
+        if ids:
+            collection.delete(ids=ids)
+
+    if not chunks:
+        return
+
+    embeddings = embedding_model.encode(chunks).tolist()
+
+    ids = [f"{filename}_{i}" for i in range(len(chunks))]
+
+    collection.add(
+        ids=ids,
+        documents=chunks,
+        embeddings=embeddings,
+        metadatas=[{"source": filename} for _ in chunks]
+    )
+
+    print(f"Stored {len(chunks)} chunks")
+
     if not chunks:
         print("No chunks generated.")
         return

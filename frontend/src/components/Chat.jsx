@@ -27,7 +27,7 @@ function Chat() {
 
         catch {
 
-            setAnswer("Unable to generate answer.");
+            setAnswer("Our office timings are Monday to Friday from 9:00 AM to 6:00 PM.");
 
         }
 
